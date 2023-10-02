@@ -4,28 +4,62 @@
 <div *ngIf="tasks && tasks.length > 0; else noTasks">
   <table class="table table-striped">
     <thead>
-    <tr>
-      <th>#</th>
-      <th>Task</th>
-      <th>Note</th>
-      <th></th>
-    </tr>
+      <tr>
+        <th>#</th>
+        <th>Task</th>
+        <th>Note</th>
+        <th>Status</th>
+        <th>Difficulty</th>
+        <th></th>
+      </tr>
     </thead>
     <tbody *ngFor="let task of tasks">
-    <tr>
-      <td>{{ task.id }}</td>
-      <td>{{ task.title }}</td>
-      <td>{{ task.note }}</td>
-      <td>
-        <button class="btn btn-light" [routerLink]="['/tasks/', task.id]"><i class="far fa-eye"></i></button>
-        <button class="btn btn-light" (click)="delete(task.id)"><i class="far fa-trash-alt"></i></button>
-        <button class="btn btn-light" [routerLink]="['/tasks/', task.id, 'edit']"><i class="far fa-edit"></i></button>
+      <tr>
+        <td>{{ task.id }}</td>
+        <td>{{ task.title }}</td>
+        <td>{{ task.note }}</td>
+        <td>
+          <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-outline-success">
+              <input type="radio" name="options" id="option1" checked> Finished 
+            </label>
+            <label class="btn btn-outline-warning">
+              <input type="radio" name="options" id="option2"> Pending
+            </label>
+            <label class="btn btn-outline-danger">
+              <input type="radio" name="options" id="option3"> Not started
+            </label>
+          </div>
       </td>
-    </tr>
+        <td>
+          <div class="form-group">
+            <select class="form-control" id="exampleFormControlSelect1">
+              <option>{{ task.difficulty }}</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+        <td>
+          <button class="btn btn-light" [routerLink]="['/tasks/', task.id]">
+            <i class="far fa-eye"></i>
+          </button>
+          <button class="btn btn-light" (click)="delete(task.id)">
+            <i class="far fa-trash-alt"></i>
+          </button>
+          <button
+            class="btn btn-light"
+            [routerLink]="['/tasks/', task.id, 'edit']"
+          >
+            <i class="far fa-edit"></i>
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>
 
 <ng-template #noTasks>
-  <h2>Congratulations, you finished your list ! </h2>
+  <h2>Congratulations, you finished your list !</h2>
 </ng-template>
